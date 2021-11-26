@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BlogService } from './blog.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'practicaltest';
+
+  alldata : any=[];
+
+  constructor(private blogservice : BlogService) { }
+  ngOnInit()
+  {
+    this.getLatestdata();
+    
+  }
+
+  public getLatestdata()
+  {
+      this.blogservice.getblog().subscribe((response)=>{
+      this.alldata = response ;
+       })
+  }
 }
